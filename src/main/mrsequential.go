@@ -47,6 +47,7 @@ func main() {
 		}
 		file.Close()
 		kva := mapf(filename, string(content))
+
 		intermediate = append(intermediate, kva...)
 	}
 
@@ -57,7 +58,7 @@ func main() {
 	//
 
 	sort.Sort(ByKey(intermediate))
-
+	fmt.Printf("%v", intermediate)
 	oname := "mr-out-0"
 	ofile, _ := os.Create(oname)
 
