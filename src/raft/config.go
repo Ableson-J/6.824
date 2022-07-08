@@ -373,7 +373,6 @@ func (cfg *config) checkOneLeader() int {
 	for iters := 0; iters < 10; iters++ {
 		ms := 450 + (rand.Int63() % 100)
 		time.Sleep(time.Duration(ms) * time.Millisecond)
-
 		leaders := make(map[int][]int)
 		for i := 0; i < cfg.n; i++ {
 			if cfg.connected[i] {
@@ -382,7 +381,6 @@ func (cfg *config) checkOneLeader() int {
 				}
 			}
 		}
-
 		lastTermWithLeader := -1
 		for term, leaders := range leaders {
 			if len(leaders) > 1 {
@@ -397,6 +395,7 @@ func (cfg *config) checkOneLeader() int {
 			return leaders[lastTermWithLeader][0]
 		}
 	}
+	fmt.Printf("%s ...\n", "3")
 	cfg.t.Fatalf("expected one leader, got none")
 	return -1
 }
