@@ -31,6 +31,7 @@ func DPrintf(format string, a ...interface{}) {
 type ApplyMsg struct {
 	CommandValid bool
 	Command      interface{}
+	CommandTerm  int
 	CommandIndex int
 
 	// For 2D:
