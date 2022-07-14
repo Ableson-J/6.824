@@ -481,6 +481,13 @@ func (rf *Raft) needReplicating(peer int) bool {
 	return rf.state == StateLeader && rf.matchIndex[peer] < rf.getLastLog().Index
 }
 
+// used by upper layer to detect whether there are any logs in current term
+func (rf *Raft) HasLogInCurrentTerm() bool {
+	rf.mu.RLock()
+	defer rf.mu.RUnlock()
+	return rf.getLastLog().Term == rf.currentTerm
+}
+
 func (rf *Raft) Start(command interface{}) (int, int, bool) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
